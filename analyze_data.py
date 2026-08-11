@@ -1,17 +1,34 @@
 """Analyze medical records using Ollama model."""
 
-from ollama import chat
+import sys
 from sqlalchemy import create_engine, text
+from ollama import chat
 
-# Database credentials
-DB_URL = "postgresql://postgres:mysecretpassword@localhost/postgres"
-MODEL = "carstenuhlig/omnicoder-2-9b:latest"
+from config import get_connection_uri, get_model
 
-def fetch_medical_records():
+
+MODEL = get_model()
+
+
+def fetch_medical_records(patient_id=None):
     """Fetch medical records from database."""
-    engine = create_engine(DB_URL)
+    engine = create_engine(get_connection_uri())
     with engine.connect() as conn:
-        result = conn.execute(text("SELECT id, patient_id, data, schema_info FROM medical_data ORDER BY id"))
+        if patient_id:
+            query = text(f"""
+                SELECT id, patient_id, data, schema_info 
+                FROM medical_data 
+                WHERE patient_id = :patient_id
+                ORDER BY id
+            """)
+            result = conn.execute(query, {"patient_id": patient_id})
+        else:
+            result = conn.execute(text("""
+                SELECT id, patient_id, data, schema_info 
+                FROM medical_data 
+                ORDER BY id
+            """))
+        
         records = []
         for row in result:
             records.append({
@@ -21,7 +38,6 @@ def fetch_medical_records():
                 "schema_info": row.schema_info
             })
         return records
-
 def analyze_with_ollama(records):
     """Send records to carstenuhlig model for analysis."""
     records_text = """Extracted Medical Data Records:
@@ -59,10 +75,14 @@ Be specific and actionable in your recommendations.
     
     return response['message']['content']
 
-def main():
-    print(f"Connecting to {DB_URL}...")
-    records = fetch_medical_records()
-    print(f"Found {len(records)} records.")
+def main(patient_id=None):
+    print(f"Connecting to database...")
+    records = fetch_medical_records(patient_id)
+    print(f"Found {len(records)} record(s).")
+    
+    if not records:
+        print("No records found.")
+        return
     
     print(f"\nAnalyzing with Ollama model: {MODEL}")
     print("="*60)
@@ -70,9 +90,13 @@ def main():
     analysis = analyze_with_ollama(records)
     
     print("="*60)
-    print("\nANALYSIS RESULT:\n")
+    print("\nANALYSIS RESULT:")
     print("-"*60)
     print(analysis)
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) > 1:
+        patient_id = sys.argv[1]
+    else:
+        patient_id = None
+    main(patient_id)
