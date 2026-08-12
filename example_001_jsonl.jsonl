@@ -1,0 +1,26 @@
+[
+  {
+    "patient_id": "P006",
+    "data": {
+      "name": "Diana White",
+      "age": 32,
+      "diagnosis": "Thyroid Disorder",
+      "vitals": {
+        "blood_pressure": "125/82",
+        "pulse": 78
+      },
+      "labs": {
+        "TSH": 8.5,
+        "T3": 1.5,
+        "T4": 9.2
+      },
+      "history": {
+        "allergies": [],
+        "medications": ["Levothyroxine"],
+        "conditions": ["Hypothyroidism"],
+        "family_history": ["Thyroid Cancer"]
+      }
+    },
+    "vitals_measurement_date": "2026-08-12T15:00:00Z"
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "patient_id": "P003",
+  "data": {
+    "name": "Bob Wilson",
+    "age": 52,
+    "diagnosis": "Asthma",
+    "vitals": {
+      "blood_pressure": {"systolic": 118, "diastolic": 76},
+      "pulse": 84
+    },
+    "labs": {
+      "WBC": 9.1,
+      "TSH": 2.8,
+      "Ferritin": 120
+    },
+    "history": {
+      "allergies": ["Pollen", "Dust"],
+      "medications": ["Inhaled Corticosteroids", "LABA/LAMA Combo"],
+      "conditions": ["Asthma", "Obesity", "Metabolic Syndrome"],
+      "family_history": ["Asthma", "Type 2 Diabetes"],
+      "surgical_history": ["Liposuction (2018)"]
+    }
+  },
+  "schema_info": {
+    "version": "2.0",
+    "schema_type": "general_patient"
+  },
+  "vitals_measurement_date": "2026-08-12T12:00:00Z"
+}

@@ -15,6 +15,11 @@ samples = [
             "age": 35,
             "diagnosis": "Diabetes Type 2",
             "vitals": {"blood_pressure": {"systolic": 120, "diastolic": 80}, "pulse": 72},
+            "labs": {
+                "ALT": 45,
+                "AST": 38,
+                "WBC": 12.5
+            },
             "history": {
                 "allergies": ["Penicillin"],
                 "medications": ["Metformin"],
@@ -32,6 +37,11 @@ samples = [
             "age": 28,
             "diagnosis": "Hypertension",
             "vitals": {"blood_pressure": {"systolic": 145, "diastolic": 92}, "pulse": 68},
+            "labs": {
+                "ALT": 32,
+                "AST": 28,
+                "WBC": 8.2
+            },
             "history": {
                 "allergies": [],
                 "medications": ["Lisinopril"],

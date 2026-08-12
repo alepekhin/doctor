@@ -1,0 +1,70 @@
+{
+  "records": [
+    {
+      "patient_id": "P004",
+      "data": {
+        "name": "Alice Johnson",
+        "age": 41,
+        "diagnosis": "None",
+        "vitals": {
+          "blood_pressure": {"systolic": 128, "diastolic": 84},
+          "pulse": 76
+        },
+        "labs": {
+          "HbA1c": 5.8,
+          "Glucose_Fasting": 102,
+          "ALT": 52,
+          "AST": 45,
+          "WBC": 7.8,
+          "Creatinine": 0.85,
+          "eGFR": 108,
+          "Ferritin": 180,
+          "TSH": 3.2
+        },
+        "history": {
+          "allergies": ["Shellfish"],
+          "medications": ["Multivitamin"],
+          "conditions": [],
+          "family_history": ["Type 2 Diabetes"],
+          "surgical_history": []
+        }
+      },
+      "schema_info": {
+        "version": "2.0",
+        "schema_type": "general_patient"
+      },
+      "vitals_measurement_date": "2026-08-12T13:00:00Z"
+    },
+    {
+      "patient_id": "P005",
+      "data": {
+        "name": "Charlie Brown",
+        "age": 65,
+        "diagnosis": "Coronary Artery Disease",
+        "vitals": {
+          "blood_pressure": {"systolic": 155, "diastolic": 95},
+          "pulse": 82
+        },
+        "labs": {
+          "LDL": 125,
+          "HDL": 35,
+          "Triglycerides": 170,
+          "CRP": 5.2,
+          "WBC": 9.5
+        },
+        "history": {
+          "allergies": ["Sulfa drugs"],
+          "medications": ["Atorvastatin", "Nitroglycerin", "Aspirin"],
+          "conditions": ["Coronary Artery Disease", "Obesity"],
+          "family_history": ["Heart Disease", "Type 2 Diabetes"],
+          "surgical_history": ["Percutaneous Coronary Intervention (2020)"]
+        }
+      },
+      "schema_info": {
+        "version": "2.0",
+        "schema_type": "patient_with_blood_tests"
+      },
+      "vitals_measurement_date": "2026-08-12T14:00:00Z"
+    }
+  ]
+}

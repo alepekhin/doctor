@@ -102,6 +102,11 @@ if __name__ == "__main__":
                     "age": 35,
                     "diagnosis": "Diabetes Type 2",
                     "vitals": {"blood_pressure": "120/80", "pulse": 72},
+                    "labs": {
+                        "ALT": 45,
+                        "AST": 38,
+                        "WBC": 12.5
+                    },
                     "history": {
                         "allergies": ["Penicillin"],
                         "medications": ["Metformin"],
@@ -117,6 +122,11 @@ if __name__ == "__main__":
                     "age": 28,
                     "diagnosis": "Hypertension",
                     "vitals": {"blood_pressure": "145/92", "pulse": 68},
+                    "labs": {
+                        "ALT": 32,
+                        "AST": 28,
+                        "WBC": 8.2
+                    },
                     "history": {
                         "allergies": [],
                         "medications": ["Lisinopril"],

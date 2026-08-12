@@ -38,10 +38,11 @@ def load_config() -> dict:
             pass
     
     # Fall back to environment variables
-    if "DB_URL" in sys.environ:
-        config["db_url"] = sys.environ["DB_URL"]
-    if "MODEL" in sys.environ:
-        config["model"] = sys.environ["MODEL"]
+    import os
+    if "DB_URL" in os.environ:
+        config["db_url"] = os.environ["DB_URL"]
+    if "MODEL" in os.environ:
+        config["model"] = os.environ["MODEL"]
     
     return config
 
@@ -66,6 +67,11 @@ SAMPLES = [
             "age": 35,
             "diagnosis": "Diabetes Type 2",
             "vitals": {"blood_pressure": {"systolic": 120, "diastolic": 80}, "pulse": 72},
+            "labs": {
+                "ALT": 45,  # Elevated (normal: 7-56 U/L)
+                "AST": 38,  # Normal (normal: 10-40 U/L)
+                "WBC": 12.5  # Elevated (normal: 4.5-11.0 x10^9/L)
+            },
             "history": {
                 "allergies": ["Penicillin"],
                 "medications": ["Metformin"],
@@ -81,6 +87,11 @@ SAMPLES = [
             "age": 28,
             "diagnosis": "Hypertension",
             "vitals": {"blood_pressure": {"systolic": 145, "diastolic": 92}, "pulse": 68},
+            "labs": {
+                "ALT": 32,  # Normal
+                "AST": 28,  # Normal
+                "WBC": 8.2  # Normal
+            },
             "history": {
                 "allergies": [],
                 "medications": ["Lisinopril"],
