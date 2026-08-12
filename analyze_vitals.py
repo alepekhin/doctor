@@ -8,12 +8,11 @@ DB_URL = "postgresql://postgres:mysecretpassword@localhost/postgres"
 MODEL = "carstenuhlig/omnicoder-2-9b:latest"
 
 def extract_vitals(patient_id=None):
-    """Fetch vitals with measurement date from medical_data table."""
+    """Fetch vitals with measurement date from medical_data table (optional)."""
     engine = create_engine(DB_URL)
     try:
         with engine.connect() as conn:
             if patient_id:
-                print(f"one patient\n")
                 query = text(f"""
                     SELECT 
                         id,
@@ -23,6 +22,7 @@ def extract_vitals(patient_id=None):
                         data->'vitals' as vitals
                     FROM medical_data
                     WHERE patient_id = :patient_id
+                      AND data->'vitals' IS NOT NULL
                     ORDER BY vitals_measurement_date DESC NULLS LAST
                 """)
                 result = conn.execute(query, {"patient_id": patient_id})
@@ -35,6 +35,7 @@ def extract_vitals(patient_id=None):
                         measurement_source,
                         data->'vitals' as vitals
                     FROM medical_data
+                    WHERE data->'vitals' IS NOT NULL
                     ORDER BY vitals_measurement_date DESC NULLS LAST
                 """))
             

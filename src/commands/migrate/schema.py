@@ -34,7 +34,7 @@ class MedicalData(Base):
     patient_id = Column(String(50), nullable=False, index=True)
     data = Column(JSONB, comment="Arbitrary medical data as JSON")
     schema_info = Column(JSON, comment="Schema information for the data")
-    vitals_measurement_date = Column(DateTime, comment="Date/vitals were measured")
+    vitals_measurement_date = Column(DateTime, comment="Date/vitals were measured (optional)")
     measurement_source = Column(String(20), comment="Source of measurement (device/manual)")
     
     @property

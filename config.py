@@ -88,14 +88,28 @@ SAMPLES = [
             "diagnosis": "Hypertension",
             "vitals": {"blood_pressure": {"systolic": 145, "diastolic": 92}, "pulse": 68},
             "labs": {
-                "ALT": 32,  # Normal
-                "AST": 28,  # Normal
-                "WBC": 8.2  # Normal
+                "ALT": 32,
+                "AST": 28,
+                "WBC": 8.2
             },
             "history": {
                 "allergies": [],
                 "medications": ["Lisinopril"],
                 "conditions": ["Hypertension"]
+            }
+        },
+        "schema_info": {"version": "1.0", "schema_type": "general_patient"},
+    },
+    {
+        "patient_id": "P003",
+        "data": {
+            "name": "Bob Wilson",
+            "age": 52,
+            "diagnosis": "Asthma",
+            "history": {
+                "allergies": [],
+                "medications": ["Inhaled Corticosteroids"],
+                "conditions": ["Asthma", "Obesity"]
             }
         },
         "schema_info": {"version": "1.0", "schema_type": "general_patient"},

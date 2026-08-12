@@ -75,7 +75,6 @@ samples = [
             "name": "Bob Wilson",
             "age": 52,
             "diagnosis": "Asthma",
-            "vitals": {"blood_pressure": {"systolic": 118, "diastolic": 76}, "pulse": 84},
             "history": {
                 "allergies": [],
                 "medications": ["Inhaled Corticosteroids"],
@@ -85,24 +84,7 @@ samples = [
         "schema_info": {"version": "1.0", "schema_type": "general_patient"},
         "vitals_measurement_date": base_time + timedelta(hours=12),
         "measurement_source": "device"
-    },
-    {
-        "patient_id": "P003",
-        "data": {
-            "name": "Bob Wilson",
-            "age": 52,
-            "diagnosis": "Asthma",
-            "vitals": {"blood_pressure": {"systolic": 122, "diastolic": 79}, "pulse": 88},
-            "history": {
-                "allergies": [],
-                "medications": ["Inhaled Corticosteroids"],
-                "conditions": ["Asthma", "Obesity"]
-            }
-        },
-        "schema_info": {"version": "1.0", "schema_type": "general_patient"},
-        "vitals_measurement_date": base_time + timedelta(hours=24),
-        "measurement_source": "device"
-    },
+    }
 ]
 
 with engine.connect() as conn:
