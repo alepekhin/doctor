@@ -1,0 +1,41 @@
+{
+  "report_section": "Биохимия",
+  "description": "Laboratory test results.",
+  "results": [
+    {
+      "test_name_russian": "АЛТ (Аланинаминотрансфераза)",
+      "test_name_english": "ALT (Alanine Aminotransferase)",
+      "result": 40.45,
+      "unit": "Ед/л",
+      "reference_interval": "0 - 41"
+    },
+    {
+      "test_name_russian": "АСТ (аспартатаминотрансфераза)",
+      "test_name_english": "AST (Aspartate Aminotransferase)",
+      "result": 35.04,
+      "unit": "Ед/л",
+      "reference_interval": "0 - 37"
+    },
+    {
+      "test_name_russian": "Билурубин общий",
+      "test_name_english": "Total Bilirubin",
+      "result": 9.94,
+      "unit": "мкмоль/л",
+      "reference_interval": "3.4 - 20.5"
+    },
+    {
+      "test_name_russian": "Гамма-глутамилтрансфераза (Гамма-ГТ)",
+      "test_name_english": "Gamma-Glutamyl Transferase (GGT)",
+      "result": 40.05,
+      "unit": "Ед/л",
+      "reference_interval": "0 - 49"
+    },
+    {
+      "test_name_russian": "Щёлочная фосфатаза",
+      "test_name_english": "Alkaline Phosphatase (ALP)",
+      "result": 201.55,
+      "unit": "Ед/л",
+      "reference_interval": "70 - 270"
+    }
+  ]
+}
