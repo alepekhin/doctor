@@ -1,136 +1,110 @@
-# Doctor — AI Medical Data Analyzer
+# Doctor - Medical Data Analysis CLI
 
-**Doctor** — CLI инструмент для анализа медицинских лабораторных данных с использованием локальной LLM Ollama.
+A simple, autonomous command-line tool for analyzing medical data using Ollama LLM.
 
-## 🎯 Назначение
+## Features
 
-Анализирует медицинские лабораторные анализы (биохимия, печёночные ферменты, почечные функции и т.д.) и предоставляет клиническую интерпретацию.
+- Analyze JSON lab test data with medical insights
+- Process medical imaging (tables) and convert to analytical conclusions
+- Works offline on Ubuntu 26.04+ with local Ollama
+- Minimal dependencies, Python 3.8+
 
-## 🧰 Технологии
+## Requirements
 
-- **Python 3.8+**
-- **Ollama** с моделью `carstenuhlig/omnicoder-2-9b:latest`
-- **Стандартные библиотеки** (requests)
+- Python 3.8+
+- [Ollama](https://ollama.ai) server running locally
+- Models: `carstenuhlig/omnicoder-2-9b:latest`, `gemma4:latest`
 
-## 📦 Требования
+## Installation
 
 ```bash
-# Виртуальное окружение (рекомендуется)
-python3 -m venv venv
-source venv/bin/activate  #Linux/macOS
-source venv/Scripts/activate  # Windows
-
-# Установка зависимостей
+# Install Python dependencies
 pip install -r requirements.txt
-```
 
-## 🚀 Запуск
-
-### Базовый запуск
-
-```bash
-cat blud.json | python3 doctor
-```
-
-### Интерактивный режим
-
-```bash
-python3 doctor
-# Вставьте JSON с данными анализов (Ctrl+D для завершения)
-```
-
-### Пайплайн
-
-```bash
-cat input.json | python3 doctor | less
-```
-
-### Ссылка на модель
-
-```bash
-pip install -r requirements.txt
+# (Optional) Pull required Ollama models
 ollama pull carstenuhlig/omnicoder-2-9b:latest
-ollama serve &  # Запуск Ollama в фоне
+ollama pull gemma4:latest
 ```
 
-## 📊 Формат входных данных
+## Usage
 
-```json
-{
-  "report_section": "Биохимия",
-  "description": "Лабораторные показатели",
-  "results": [
-    {
-      "test_name_russian": "АЛТ",
-      "test_name_english": "ALT",
-      "result": 48.45,
-      "unit": "Ед/л",
-      "reference_interval": "0 - 41"
-    }
-  ]
-}
-```
-
-## 🧪 Тестирование
-
-### Успешный анализ
+### Analyze JSON file
 
 ```bash
-cat blud.json | python3 doctor
-# Ожидается клиническая интерпретация на русском языке
+python main.py blood.json
+
+# Output:
+Medical Analysis Result:
+[Analysis conclusion]
+
+⚠️ Medical Disclaimer: This analysis is AI-generated. Consult a qualified medical professional for medical advice.
 ```
 
-### Проверка подключения Ollama
+### Analyze image file
 
 ```bash
-# Если ошибка подключения:
-python3 doctor << EOF 2>&1 | grep -i "error\|ollama"
-EOF
+python main.py blood.jpg
+
+# Output:
+Medical Analysis Result:
+[Extraction and analysis from image]
+
+⚠️ Medical Disclaimer: This analysis is AI-generated. Consult a qualified medical professional for medical advice.
 ```
 
-### Запуск теста (любой вход)
+## Testing
 
 ```bash
-# Простой JSON для проверки
-echo '{"test_name_english": "Креатинин", "result": 105, "unit": "мкмоль/л"}' | python3 doctor
+# Run unit tests (no Ollama required)
+python3 -m pytest tests/test_all.py -v
+
+# Run live integration tests against a running Ollama server
+python3 -m pytest tests/test_live.py -v
+
+# Run the full suite (unit + live)
+python3 -m pytest tests/ -v
 ```
 
-### Стресс-тест (много результатов)
+Live tests are skipped automatically if Ollama is unreachable.
 
-```bash
-# Для тестирования производительности
-cat blud.json | python3 doctor | head -100
-```
-
-## 📁 Файлы проекта
+## Project Structure
 
 ```
-├── doctor                    # CLI входная точка
-├── ollama_client.py          # Ollama API клиент
-├── requirements.txt          # Зависимости
-└── AGENTS.md                 # Документ для AI агентов
+doctor/
+├── main.py                    # CLI entry point
+├── api_client.py              # Ollama API client
+├── models.py                  # Model routing & detection
+├── analyzers.py               # Data analysis logic
+├── disclaimer.py              # Medical disclaimer
+├── tests/                     # Comprehensive test suite
+│   └── test_all.py
+├── config/models.json         # Model configuration
+├── requirements.txt           # Dependencies
+├── AGENTS.md                  # Project guide
+├── LICENSE                    # MIT License
+└── README.md                  # This file
 ```
 
-## 🤝 Совместимость
+## Technical Details
 
-- ✅ Linux
-- ✅ macOS
-- ✅ Windows (PowerShell/bash)
+### Data Flow
 
-## 📝 Выходные данные
+- **JSON input**: Direct analysis with `carstenuhlig/omnicoder-2-9b:latest`
+- **Image input**: Convert to JSON with `gemma4:latest` → Analyze → Output
 
-Инструмент генерирует на русском языке:
+### Output Format
 
-- ⚠️ Клиническое резюме
-- 📋 Список аномальных показателей
-- 🔍 Детальный анализ
-- 💊 Рекомендации
+- Streaming analysis to stdout
+- JSON input → Medical conclusion → Disclaimer
+- Image input → Table extraction → Medical conclusion → Disclaimer
 
-## ⚠️ Важно
+### Error Handling
 
-Это ИИ-инструмент, а не медицинский диагноз.
-**Все результаты требуют подтверждения врачом.**
+- Graceful handling of missing models
+- Automatic model loading with progress
+- Connection retries with exponential backoff
+- Clear error messages for file not found, invalid JSON, etc.
 
----
+## License
 
-**Лицензия**: MIT
+MIT License - See [LICENSE](LICENSE) file.

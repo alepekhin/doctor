@@ -1,0 +1,8 @@
+{
+  "models": {
+    "omnicoder": "carstenuhlig/omnicoder-2-9b:latest",
+    "gemma4": "gemma4:latest"
+  },
+  "ollama_host": "http://127.0.0.1:11434",
+  "timeout_seconds": 300
+}
